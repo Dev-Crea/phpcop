@@ -3,7 +3,8 @@ php:
   # Precise PHP version
   version: 7
   # Precise convention used
-  rule: PSR-2
+  rules:
+    - PSR-2
   # Precise framework used
   framework: zf-2
 
@@ -13,4 +14,4 @@ AllCops:
   phpTags:
     enabled: true
     description: 'PHP Tags'
-    see: http://www.php-fig.org/psr/psr-1/#2-1-php-tags
+    see: 'http://www.php-fig.org/psr/psr-1/#2-1-php-tags'
