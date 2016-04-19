@@ -1,9 +1,0 @@
-php:
-  version: 7
-  rule: PSR-2
-
-rules:
-  phpTags:
-    enabled: true
-    description: 'PHP Tags'
-    see: http://www.php-fig.org/psr/psr-1/#2-1-php-tags
