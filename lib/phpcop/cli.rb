@@ -9,7 +9,28 @@ module PhpCop
       @config_store = ConfigStore.new
     end
 
-    def run(args = ARGV)
+    # Run all files
+    def run(_args = ARGV)
+      Dir.foreach('.') do |file|
+        Logger.debug file
+        if file.isDirectory?
+          foreach_folder(file)
+        else
+          execute_tests_in_file(file)
+        end
+      end
+    end
+
+    private
+
+    def foreach_folder(folder)
+      Dir.foreach(folder) do |file|
+        execute_tests_in_file(file)
+      end
+    end
+
+    def execute_tests_in_file(file)
+      PhpTags.new(file) if file.extname('.php')
     end
   end
 end
