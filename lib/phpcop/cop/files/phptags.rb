@@ -3,16 +3,18 @@ module PhpCop
     module Files
       # This class test file php use correctly tags PHP '<?php ?>' or '<?= ?>'
       class PhpTags
-        MSG_ALERT = 'Files ,%s, dont use correctly PHP Tags.'.freeze
+        MSG_ALERT = '%s, dont use correctly PHP Tags.'.freeze
+
+        TAG_OPEN = ['\<\?php', '\<\?='].freeze
+        TAG_CLOSE = ['\?\>'].freeze
 
         def initialize(file)
           @count_open = 0
           @count_close = 0
 
-          puts '.'
-
           # Open file and parse
-          while (line = File.open(file, 'r').gets)
+          f = File.open(file, 'r')
+          while (line = f.gets)
             parse_line(line)
           end
 
@@ -24,22 +26,26 @@ module PhpCop
 
         def parse_line(line)
           # Parse file and search tags exists
-          @count_open += 1 if parse_and_search_open_tag(line)
+          parse_and_search_open_tag(line)
           # If file contains tag <?php or <?= search close tags
-          @count_close += 1 if parse_and_search_close_tag(line)
+          parse_and_search_close_tag(line)
         end
 
         # Parse file and search tags
         def parse_and_search_open_tag(line)
-          line.include? %w(<?php <?=)
+          TAG_OPEN.each do |rule|
+            @count_open += 1 if Regexp.new(rule).match line
+          end
         end
 
         def parse_and_search_close_tag(line)
-          line.include? %w(?>)
+          TAG_CLOSE.each do |rule|
+            @count_close += 1 if Regexp.new(rule).match line
+          end
         end
 
         def test_counters(file)
-          return_an_error(file) if @count_open == @count_close
+          return_an_error(file) unless @count_open == @count_close
         end
 
         # Return a text error with file name

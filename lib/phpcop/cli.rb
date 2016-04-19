@@ -5,11 +5,12 @@ module PhpCop
     EXT = %w(.php .phtml .php.dist).freeze
     EXCLUDE_FOLDER = %w(. .. .git .gitignore vendor).freeze
 
-    attr_reader :options, :config_store
+    attr_reader :options, :config_store, :count_files
 
     def initialize
       @options = {}
       @config_store = ConfigStore.new
+      @count_files = 0
     end
 
     # Run all files
@@ -17,6 +18,8 @@ module PhpCop
       Dir.foreach(Dir.pwd) do |file|
         run_folder(file, Dir.pwd)
       end
+
+      puts format('%s fichier traité. X erreurs.', @count_files)
     end
 
     private
@@ -32,15 +35,15 @@ module PhpCop
         f = path + '/' + file
         if File.directory?(f)
           foreach_folder(f)
-        else
-          execute_tests_in_file(file, path) if EXT.include?(File.extname(file))
+        elsif EXT.include?(File.extname(file))
+          execute_tests_in_file(file, path)
         end
       end
     end
 
     def execute_tests_in_file(file, path)
-      puts format('%s/%s', path, file)
-      # PhpCop::Cop::Files::PhpTags.new(file)
+      @count_files += 1
+      PhpCop::Cop::Files::PhpTags.new(format('%s/%s', path, file))
     end
   end
 end
