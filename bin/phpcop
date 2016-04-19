@@ -6,6 +6,8 @@ require 'benchmark'
 cli = PhpCop::CLI.new
 result = 0
 
+puts format('Scan project : %s', Dir.pwd)
+
 time = Benchmark.realtime do
   result = cli.run
 end
