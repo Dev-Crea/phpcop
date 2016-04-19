@@ -1,6 +1,6 @@
 # Phpcop
 
-Tools for detect error PSRs.
+Tools for detect error (PSRs)[http://www.php-fig.org/].
 
 ## Installation
 
