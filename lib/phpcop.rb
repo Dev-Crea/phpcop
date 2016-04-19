@@ -1,5 +1,5 @@
 require 'phpcop/version'
 
-require 'phpcop/config'
-
+require 'phpcop/configloader'
+require 'phpcop/configstore'
 require 'phpcop/cli'
