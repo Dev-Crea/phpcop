@@ -2,8 +2,8 @@ module PhpCop
   # The CLI is a class responsible of handling all the command line interface
   # logic
   class CLI
-    EXT = %w('.php').freeze
-    EXCLUDE_FOLDER = %w(. .. .git .gitignore).freeze
+    EXT = %w(.php .phtml .php.dist).freeze
+    EXCLUDE_FOLDER = %w(. .. .git .gitignore vendor).freeze
 
     attr_reader :options, :config_store
 
@@ -15,31 +15,32 @@ module PhpCop
     # Run all files
     def run(_args = ARGV)
       Dir.foreach(Dir.pwd) do |file|
-        run_folder(file)
+        run_folder(file, Dir.pwd)
       end
     end
 
     private
 
-    def foreach_folder(folder)
-      Dir.foreach(folder) do |file|
-        run_folder(file)
+    def foreach_folder(path)
+      Dir.foreach(path) do |file|
+        run_folder(file, path)
       end
     end
 
-    def run_folder(file)
+    def run_folder(file, path)
       unless EXCLUDE_FOLDER.include?(file)
-        if File.directory?(file)
-          foreach_folder(file)
+        f = path + '/' + file
+        if File.directory?(f)
+          foreach_folder(f)
         else
-          execute_tests_in_file(file)
+          execute_tests_in_file(file, path) if EXT.include?(File.extname(file))
         end
       end
     end
 
-    def execute_tests_in_file(file)
-      puts format('SCAN : %s - extension : %s', file, File.extname(file))
-      PhpCop::Cop::Files::PhpTags.new(file) if EXT.include?(File.extname(file))
+    def execute_tests_in_file(file, path)
+      puts format('%s/%s', path, file)
+      # PhpCop::Cop::Files::PhpTags.new(file)
     end
   end
 end

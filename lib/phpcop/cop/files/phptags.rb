@@ -9,11 +9,10 @@ module PhpCop
           @count_open = 0
           @count_close = 0
 
-          puts format('Scan file : %s', file)
+          puts '.'
 
           # Open file and parse
-          f = File.new(file, 'r')
-          while (line = f.gets)
+          while (line = File.open(file, 'r').gets)
             parse_line(line)
           end
 
