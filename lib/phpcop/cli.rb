@@ -11,6 +11,7 @@ module PhpCop
       @options = {}
       @config_store = ConfigStore.new
       @count_files = 0
+      @count_errors = 0
     end
 
     # Run all files
@@ -19,7 +20,7 @@ module PhpCop
         run_folder(file, Dir.pwd)
       end
 
-      puts format('%s fichier traité. X erreurs.', @count_files)
+      puts format('%s fichier traité. %s erreurs.', @count_files, @count_errors)
     end
 
     private
@@ -43,7 +44,8 @@ module PhpCop
 
     def execute_tests_in_file(file, path)
       @count_files += 1
-      PhpCop::Cop::Files::PhpTags.new(format('%s/%s', path, file))
+      test = PhpCop::Cop::Files::PhpTags.new(format('%s/%s', path, file))
+      @count_errors += test.errors
     end
   end
 end

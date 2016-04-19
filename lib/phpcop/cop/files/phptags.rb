@@ -4,13 +4,15 @@ module PhpCop
       # This class test file php use correctly tags PHP '<?php ?>' or '<?= ?>'
       class PhpTags
         MSG_ALERT = '%s, dont use correctly PHP Tags.'.freeze
-
         TAG_OPEN = ['\<\?php', '\<\?='].freeze
         TAG_CLOSE = ['\?\>'].freeze
+
+        attr_reader :errors
 
         def initialize(file)
           @count_open = 0
           @count_close = 0
+          @errors = 0
 
           # Open file and parse
           f = File.open(file, 'r')
@@ -51,6 +53,7 @@ module PhpCop
         # Return a text error with file name
         def return_an_error(file)
           puts format(MSG_ALERT, file)
+          @errors += 1
         end
       end
     end
