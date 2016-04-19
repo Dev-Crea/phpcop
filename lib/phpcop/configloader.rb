@@ -17,7 +17,7 @@ module Phpcop
     private
 
     def load_configuration(file)
-      File.exists?(file) ? YAML.load(file) : false
+      File.exist?(file) ? YAML.load(file) : false
     end
   end
 end
