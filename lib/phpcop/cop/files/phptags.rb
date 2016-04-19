@@ -4,9 +4,12 @@ module PhpCop
       # This class test file php use correctly tags PHP '<?php ?>' or '<?= ?>'
       class PhpTags
         MSG_ALERT = 'Files ,%s, dont use correctly PHP Tags.'.freeze
+
         def initialize(file)
           @count_open = 0
           @count_close = 0
+
+          puts format('Scan file : %s', file)
 
           # Open file and parse
           f = File.new(file, 'r')
