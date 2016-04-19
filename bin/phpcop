@@ -11,4 +11,4 @@ time = Benchmark.realtime do
 end
 
 puts "Finished in#{time} seconds"
-exit result
+exit 0
