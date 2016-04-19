@@ -3,9 +3,13 @@ module PhpCop
   # logic
   class CLI
     attr_reader :options, :config_store
+
     def initialize
       @options = {}
       @config_store = ConfigStore.new
+    end
+
+    def run(args = ARGV)
     end
   end
 end
