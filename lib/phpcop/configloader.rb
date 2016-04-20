@@ -11,9 +11,7 @@ module PhpCop
 
     def initialize
       load_configuration(DEFAULT_CONF)
-      if load_configuration(CUSTOMIZE_CONF)
-        puts 'Erase default configuration.'
-      end
+      puts 'Erase default configuration.' if load_configuration(CUSTOMIZE_CONF)
     end
 
     private
