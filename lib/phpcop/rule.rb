@@ -7,9 +7,9 @@ module PhpCop
       nt = name.split('/')
       @name = nt[1]
       @type = nt[0]
-      @enabled = option.enabled
-      @description = option.description
-      @see = option.see
+      @enabled = option['enabled']
+      @description = option['description']
+      @see = option['see']
     end
   end
 end
