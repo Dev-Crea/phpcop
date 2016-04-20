@@ -4,6 +4,8 @@ module PhpCop
   class CLI
     attr_reader :options, :config_store
 
+    MSG_END = '%s fichier traité. %s erreurs.'.freeze
+
     def initialize
       @options = {}
       @config_store = ConfigStore.new
@@ -12,8 +14,7 @@ module PhpCop
     # Run all files
     def run(_args = ARGV)
       runner = PhpCop::Runner.new
-      puts format('%s fichier traité. %s erreurs.',
-                  runner.count_files, runner.count_errors)
+      puts format(MSG_END, runner.count_files, runner.count_errors)
     end
   end
 end
