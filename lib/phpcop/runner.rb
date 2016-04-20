@@ -40,10 +40,9 @@ module PhpCop
     # Test each rules
     def execute_tests_in_file(file, path)
       @count_files += 1
-      file_with_path = format('%s/%s', path, file)
       line_number = 0
       # Execute all test in file
-      f = File.open(file_with_path, 'r')
+      f = File.open(format('%s/%s', path, file), 'r')
       @php_tag = PhpCop::Cop::Files::PhpTags.new(file)
       while (line = f.gets)
         parse_file(file, line, line_number)
