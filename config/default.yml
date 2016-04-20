@@ -15,3 +15,7 @@ AllCops:
     enabled: true
     description: 'PHP Tags'
     see: 'http://www.php-fig.org/psr/psr-1/#2-1-php-tags'
+  files/phpEncoding:
+    enabled: true
+    description: 'PHP code MUST use only UTF-8 without BOM.'
+    see: 'http://www.php-fig.org/psr/psr-1/#2-2-character-encoding'
