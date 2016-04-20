@@ -22,3 +22,8 @@ AllCops:
     description: >
       PHP code MUST use only UTF-8 without BOM.
     see: 'http://www.php-fig.org/psr/psr-1/#2-2-character-encoding'
+  ccpm/methods:
+    enabled: true
+    description: >
+      http://www.php-fig.org/psr/psr-1/#4-3-methods
+    see: 'http://www.php-fig.org/psr/psr-1/#4-3-methods'

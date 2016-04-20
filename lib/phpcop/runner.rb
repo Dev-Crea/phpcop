@@ -59,6 +59,8 @@ module PhpCop
           test_file_php_tags(line, line_number) if value.enabled
         when 'phpEncoding'
           test_file_php_encoding(file, line, line_number) if value.enabled
+        when 'methods'
+          test_ccpm_methods(file, line, line_number) if value.enabled
         end
       end
     end
@@ -69,6 +71,11 @@ module PhpCop
 
     def test_file_php_encoding(file, line, line_number)
       test = PhpCop::Cop::Files::PhpEncoding.new(file, line, line_number)
+      @count_errors += test.errors
+    end
+
+    def test_ccpm_methods(file, line, line_number)
+      test = PhpCop::Cop::CCPM::Methods.new(file, line, line_number)
       @count_errors += test.errors
     end
   end
