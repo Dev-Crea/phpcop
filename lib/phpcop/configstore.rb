@@ -13,5 +13,9 @@ module PhpCop
         @rules.push PhpCop::Rule.new(val[0], val[1])
       end
     end
+
+    def rules_by_type(type)
+      @rules.select { |rule| rule.type.eql? type }
+    end
   end
 end
