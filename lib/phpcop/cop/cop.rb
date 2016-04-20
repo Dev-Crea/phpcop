@@ -19,6 +19,7 @@ module PhpCop
 
       def return_an_error(file, line, column)
         @errors += 1
+        line += 1
         puts format(MSG_ALERT_FILE, file, line, column)
       end
     end

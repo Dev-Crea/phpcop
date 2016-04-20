@@ -3,35 +3,38 @@ module PhpCop
     module Files
       # This class test file php use correctly tags PHP '<?php ?>' or '<?= ?>'
       class PhpTags < Cop
+        attr_reader :count_open, :count_close
+
         MSG_ALERT_DESCRIB = 'Dont use correctly PHP Tags.'.freeze
         TAG_OPEN = ['\<\?php', '\<\?='].freeze
         TAG_CLOSE = ['\?\>'].freeze
 
-        def initialize(line)
-          super
-          # Parse line and test if line use correctly tags PHP
-          f = File.open(file, 'r')
-          while (line = f.gets)
-            parse_line(line.to_s)
-          end
+        def initialize(file, line = nil, line_number = nil)
+          super(file, line, line_number)
+        end
 
-          # Test counters if there are equal
-          test_counters(file)
+        def test_counters
+          # Test if tags open is equal to tags close
+          unless @count_open == @count_close
+            return_an_error(@file, @line_number, 0)
+          end
+        end
+
+        # Parse line and test if line use correctly tags PHP
+        def test_line(line, line_number)
+          @line = line
+          @line_number = line_number
+          # Parse file and search tags exists
+          parse_and_search_open_tag(@line)
+          # If file contains tag <?php or <?= search close tags
+          parse_and_search_close_tag(@line)
         end
 
         private
 
-        def parse_line(line)
-          # Parse file and search tags exists
-          parse_and_search_open_tag(line)
-          # If file contains tag <?php or <?= search close tags
-          parse_and_search_close_tag(line)
-        end
-
         # Parse file and search tags
         def parse_and_search_open_tag(line)
           TAG_OPEN.each do |rule|
-            puts line
             @count_open += 1 if Regexp.new(rule).match line
           end
         end
@@ -42,14 +45,12 @@ module PhpCop
           end
         end
 
-        def test_counters(file)
-          return_an_error(file) unless @count_open == @count_close
-        end
-
-        # Return a text error with file name
-        def return_an_error(file)
-          puts format(MSG_ALERT, file)
+        def return_an_error(file, line, column)
           @errors += 1
+          line += 1
+          puts format(MSG_ALERT_FILE, file, line, column)
+          puts MSG_ALERT_DESCRIB
+          puts ''
         end
       end
     end

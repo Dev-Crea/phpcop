@@ -44,26 +44,28 @@ module PhpCop
       line_number = 0
       # Execute all test in file
       f = File.open(file_with_path, 'r')
+      @php_tag = PhpCop::Cop::Files::PhpTags.new(file)
       while (line = f.gets)
         parse_file(file, line, line_number)
         line_number += 1
       end
+      @php_tag.test_counters
+      @count_errors += @php_tag.errors
     end
 
     def parse_file(file, line, line_number)
       @rules.each do |value|
         case value.name
         when 'phpTags'
-          test_file_php_tags(file, line, line_number) if value.enabled
+          test_file_php_tags(line, line_number) if value.enabled
         when 'phpEncoding'
           test_file_php_encoding(file, line, line_number) if value.enabled
         end
       end
     end
 
-    def test_file_php_tags(file, line, line_number)
-      test = PhpCop::Cop::Files::PhpTags.new(file, line, line_number)
-      @count_errors += test.errors
+    def test_file_php_tags(line, line_number)
+      @php_tag.test_line(line, line_number)
     end
 
     def test_file_php_encoding(file, line, line_number)
