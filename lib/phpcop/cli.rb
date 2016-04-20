@@ -12,7 +12,7 @@ module PhpCop
 
     # Run all files
     def run(_args = ARGV)
-      runner = PhpCop::Runner.new
+      runner = PhpCop::Runner.new(@config_store.rules)
       puts format(MSG_END, runner.count_files, runner.count_errors)
     end
   end
