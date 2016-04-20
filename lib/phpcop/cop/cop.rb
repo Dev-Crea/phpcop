@@ -4,14 +4,15 @@ module PhpCop
     class Cop
       attr_reader :errors
       # Display an error 'fichier.ext:line:column'
-      MSG_ALERT_FILE = '%s:%s:%'.freeze
+      MSG_ALERT_FILE = '%s:%s:%s'.freeze
 
-      def initialize(file, line)
+      def initialize(file, line, line_number)
         @count_open = 0
         @count_close = 0
         @errors = 0
         @file = file
         @line = line
+        @line_number = line_number
       end
 
       private

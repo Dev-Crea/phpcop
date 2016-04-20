@@ -5,18 +5,26 @@ module PhpCop
       class PhpEncoding < Cop
         MSG_ALERT_DESCRIB = 'Is not encoding in UTF-8 without BOM.'.freeze
 
-        def initialize(file, line)
-          super(file, line)
+        def initialize(file, line, line_number)
+          super(file, line.to_s, line_number)
+          test_line
         end
 
-        def test_line(line)
-          # Parse line and test if line is correctly enconding
-          if line.enconding == 'Encoding:UTF-8'
-            true
-          else
-            return_an_error(@file, @line, 0)
-            false
+        private
+
+        # Parse line and test if line is correctly enconding
+        def test_line
+          line_encoding = @line
+          unless line_encoding.ascii_only?
+            return_an_error(@file, @line_number, 0)
+            puts ''
           end
+        end
+
+        # TODO : Return poisiotn column to char non ASCII
+        def column_number
+          array = @line.split(/./)
+          array.each_with_index { |c, index| index unless c.ascii_only? }
         end
       end
     end
