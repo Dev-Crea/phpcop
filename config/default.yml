@@ -11,11 +11,14 @@ php:
 AllCops:
   # Exclude:
   #    - '**/'
-  phpTags:
+  files/phpTags:
     enabled: true
-    description: 'PHP Tags'
+    description: |
+      PHP code MUST use the long <?php ?> tags or the short-echo <?= ?> tags; it
+      MUST NOT use the other tag variations.
     see: 'http://www.php-fig.org/psr/psr-1/#2-1-php-tags'
   files/phpEncoding:
     enabled: true
-    description: 'PHP code MUST use only UTF-8 without BOM.'
+    description: |
+      PHP code MUST use only UTF-8 without BOM.
     see: 'http://www.php-fig.org/psr/psr-1/#2-2-character-encoding'
