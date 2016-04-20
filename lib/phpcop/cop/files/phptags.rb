@@ -2,22 +2,17 @@ module PhpCop
   module Cop
     module Files
       # This class test file php use correctly tags PHP '<?php ?>' or '<?= ?>'
-      class PhpTags
-        MSG_ALERT = '%s, dont use correctly PHP Tags.'.freeze
+      class PhpTags < Cop
+        MSG_ALERT_DESCRIB = 'Dont use correctly PHP Tags.'.freeze
         TAG_OPEN = ['\<\?php', '\<\?='].freeze
         TAG_CLOSE = ['\?\>'].freeze
 
-        attr_reader :errors
-
-        def initialize(file)
-          @count_open = 0
-          @count_close = 0
-          @errors = 0
-
-          # Open file and parse
+        def initialize(line)
+          super
+          # Parse line and test if line use correctly tags PHP
           f = File.open(file, 'r')
           while (line = f.gets)
-            parse_line(line)
+            parse_line(line.to_s)
           end
 
           # Test counters if there are equal
@@ -36,6 +31,7 @@ module PhpCop
         # Parse file and search tags
         def parse_and_search_open_tag(line)
           TAG_OPEN.each do |rule|
+            puts line
             @count_open += 1 if Regexp.new(rule).match line
           end
         end

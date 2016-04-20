@@ -41,6 +41,12 @@ module PhpCop
     def execute_tests_in_file(file, path)
       @count_files += 1
       file_with_path = format('%s/%s', path, file)
+      # Execute all test in file
+      f = File.open(file_with_path, 'r')
+      while (line = f.gets)
+        parse_file(file, line)
+      end
+=begin
       types_default
       @rules.each do |value|
         case value.type
@@ -48,8 +54,20 @@ module PhpCop
           test_file(file_with_path, value.type) unless @types['files']
         end
       end
+=end
     end
 
+    def parse_file(file, line)
+      @rules.each do |value|
+        case value.name
+        when 'phpTags'
+          test_file_php_tags(file, line) if value.enabled
+        when 'phpEncoding'
+          test_file_php_encoding(file, line) if value.enabled
+        end
+      end
+    end
+=begin
     def test_file(file, type)
       @conf.rules_by_type(type).each do |value|
         case value.name
@@ -61,18 +79,20 @@ module PhpCop
       end
       @types['files'] = true
     end
-
-    def test_file_php_tags(file)
-      test = PhpCop::Cop::Files::PhpTags.new(file)
+=end
+    def test_file_php_tags(file, line)
+      test = PhpCop::Cop::Files::PhpTags.new(file, line)
       @count_errors += test.errors
     end
 
-    def test_file_php_encoding
-      true
+    def test_file_php_encoding(file, line)
+      test = PhpCop::Cop::Files::Encoding.new(file, line)
+      @count_errors += test.errors
     end
-
+=begin
     def types_default
       @types.map { |k, _| @types[k] = false }
     end
+=end
   end
 end
