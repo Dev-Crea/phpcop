@@ -4,20 +4,22 @@ module PhpCop
   # This class load a files configuration to gem. So config file default and
   # customize config file in project scan
   class ConfigLoader
+    attr_reader :options
+
     # Config file in gem
     DEFAULT_CONF = 'config/default.yml'.freeze
     # Config file in project PHP
     CUSTOMIZE_CONF = '.phpcop.yml'.freeze
 
     def initialize
-      load_configuration(DEFAULT_CONF)
-      puts 'Erase default configuration.' if load_configuration(CUSTOMIZE_CONF)
+      @options = load_configuration(DEFAULT_CONF)
+      @options ||= load_configuration(CUSTOMIZE_CONF)
     end
 
     private
 
     def load_configuration(file)
-      File.exist?(file) ? YAML.load(file) : false
+      File.exist?(file) ? YAML.load(File.read(file)) : false
     end
   end
 end
