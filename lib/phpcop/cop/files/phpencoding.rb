@@ -21,7 +21,7 @@ module PhpCop
           end
         end
 
-        # TODO : Return poisiotn column to char non ASCII
+        # TODO : Return position column to char non ASCII
         def column_number
           array = @line.split(/./)
           array.each_with_index { |c, index| index unless c.ascii_only? }
