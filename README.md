@@ -21,3 +21,6 @@ Or install it yourself as:
 ## Usage
 
 Go to project and execute command `phpcop`.
+
+Use default config or create a .phpcop.yml in root to project. Copy default file
+'config/phpcop.yml'.
