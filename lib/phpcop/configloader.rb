@@ -6,8 +6,10 @@ module PhpCop
   class ConfigLoader
     attr_reader :options
 
+    # Path to gem
+    DEFAULT_PATH = File.realpath(File.join(File.dirname(__FILE__), '..', '..'))
     # Config file in gem
-    DEFAULT_CONF = 'config/default.yml'.freeze
+    DEFAULT_CONF = File.join(DEFAULT_PATH, 'config', 'default.yml').freeze
     # Config file in project PHP
     CUSTOMIZE_CONF = '.phpcop.yml'.freeze
 
