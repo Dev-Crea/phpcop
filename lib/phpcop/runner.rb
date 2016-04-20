@@ -1,7 +1,10 @@
 module PhpCop
   # This class runner
   class Runner
-    attr_accessor :count_files, :count_errors
+    EXT = %w(.php .phtml .php.dist).freeze
+    EXCLUDE_FOLDER = %w(. .. .git .gitignore vendor).freeze
+
+    attr_reader :count_files, :count_errors
 
     def initialize
       @count_files = 0

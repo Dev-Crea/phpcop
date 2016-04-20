@@ -2,9 +2,6 @@ module PhpCop
   # The CLI is a class responsible of handling all the command line interface
   # logic
   class CLI
-    EXT = %w(.php .phtml .php.dist).freeze
-    EXCLUDE_FOLDER = %w(. .. .git .gitignore vendor).freeze
-
     attr_reader :options, :config_store
 
     def initialize
@@ -14,7 +11,7 @@ module PhpCop
 
     # Run all files
     def run(_args = ARGV)
-      runner = PhpCop::Runner
+      runner = PhpCop::Runner.new
       puts format('%s fichier traité. %s erreurs.',
                   runner.count_files, runner.count_errors)
     end
