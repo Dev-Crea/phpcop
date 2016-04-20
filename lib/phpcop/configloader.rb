@@ -1,6 +1,6 @@
 require 'yaml'
 
-module Phpcop
+module PhpCop
   # This class load a files configuration to gem. So config file default and
   # customize config file in project scan
   class ConfigLoader
@@ -11,7 +11,9 @@ module Phpcop
 
     def initialize
       load_configuration(DEFAULT_CONF)
-      load_configuration(CUSTOMIZE_CONF)
+      if load_configuration(CUSTOMIZE_CONF)
+        puts 'Erase default configuration.'
+      end
     end
 
     private
