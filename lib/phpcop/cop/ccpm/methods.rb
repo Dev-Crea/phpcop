@@ -1,9 +1,10 @@
-require 'active_record'
+require 'active_support/core_ext/string'
 
 module PhpCop
   module Cop
     # Acronym to Class Constants, Properties and Methods
     module CCPM
+      # Test method in php class
       class Methods < Cop
         MSG_ALERT_DESCRIB = 'Name method is not in camelCase().'.freeze
 
@@ -19,15 +20,20 @@ module PhpCop
         end
 
         def test_camel_case_method
-          name_method = @line.slice!(/function.*()/)
-          name_method = name_method.chomp('function ')
-          name_method = name_method.chomp('()')
-          name_method_camel = name_method.to_s #.camelize(:lower)
-          puts format('Original : %s - Camelize : %s', name_method,
-                      name_method_camel)
-          if name_method_camel === name_method
-            puts 'Ok correct ...'
+          name = @line.slice!(/function.*()/).gsub('function ', '')
+          name = name.gsub(/\(.*/, '')
+          unless name.include?('__')
+            name_camel = name.camelize(:lower)
+            return_an_error(@file, @line_number, 0) unless name_camel.eql? name
           end
+        end
+
+        def return_an_error(file, line, column)
+          @errors += 1
+          line += 1
+          puts format(MSG_ALERT_FILE, file, line, column)
+          puts MSG_ALERT_DESCRIB
+          puts ''
         end
       end
     end
