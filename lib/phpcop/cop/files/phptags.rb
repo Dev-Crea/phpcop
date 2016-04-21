@@ -1,3 +1,6 @@
+# encoding: utf-8
+# frozen_string_literal: true
+
 module PhpCop
   module Cop
     module Files
@@ -5,7 +8,7 @@ module PhpCop
       class PhpTags < Cop
         attr_reader :count_open, :count_close
 
-        MSG_ALERT_DESCRIB = 'Dont use correctly PHP Tags.'.freeze
+        MSG_ALERT_DESCRIB = 'Dont use correctly PHP Tags.'
         TAG_OPEN = ['\<\?php', '\<\?='].freeze
         TAG_CLOSE = ['\?\>'].freeze
 

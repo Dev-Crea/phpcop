@@ -1,3 +1,6 @@
+# encoding: utf-8
+# frozen_string_literal: true
+
 require 'active_support/core_ext/string'
 
 module PhpCop
@@ -6,7 +9,7 @@ module PhpCop
     module CCPM
       # Test method in php class
       class Methods < Cop
-        MSG_ALERT_DESCRIB = 'Name method is not in camelCase().'.freeze
+        MSG_ALERT_DESCRIB = 'Name method is not in camelCase().'
 
         def initialize(file, line, line_number)
           super(file, line.to_s, line_number)

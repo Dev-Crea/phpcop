@@ -1,10 +1,13 @@
+# encoding: utf-8
+# frozen_string_literal: true
+
 module PhpCop
   module Cop
     # Generic class for all rules
     class Cop
       attr_reader :errors
       # Display an error 'fichier.ext:line:column'
-      MSG_ALERT_FILE = '%s:%s:%s'.freeze
+      MSG_ALERT_FILE = '%s:%s:%s'
 
       def initialize(file, line, line_number)
         @count_open = 0

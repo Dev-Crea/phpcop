@@ -1,9 +1,12 @@
+# encoding: utf-8
+# frozen_string_literal: true
+
 module PhpCop
   module Cop
     module Files
       # This class test file php use correctly encoding type
       class PhpEncoding < Cop
-        MSG_ALERT_DESCRIB = 'Is not encoding in UTF-8 without BOM.'.freeze
+        MSG_ALERT_DESCRIB = 'Is not encoding in UTF-8 without BOM.'
 
         def initialize(file, line, line_number)
           super(file, line.to_s, line_number)
