@@ -1,10 +1,13 @@
+# encoding: utf-8
+# frozen_string_literal: true
+
 module PhpCop
   # The CLI is a class responsible of handling all the command line interface
   # logic
   class CLI
     attr_reader :config_store
 
-    MSG_END = '%s fichier traité. %s erreurs.'.freeze
+    MSG_END = '%s fichier traité. %s erreurs.'
 
     def initialize
       @config_store = ConfigStore.new

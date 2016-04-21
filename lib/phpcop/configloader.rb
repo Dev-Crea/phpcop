@@ -1,3 +1,6 @@
+# encoding: utf-8
+# frozen_string_literal: true
+
 require 'yaml'
 
 module PhpCop
@@ -9,9 +12,9 @@ module PhpCop
     # Path to gem
     DEFAULT_PATH = File.realpath(File.join(File.dirname(__FILE__), '..', '..'))
     # Config file in gem
-    DEFAULT_CONF = File.join(DEFAULT_PATH, 'config', 'default.yml').freeze
+    DEFAULT_CONF = File.join(DEFAULT_PATH, 'config', 'default.yml')
     # Config file in project PHP
-    CUSTOMIZE_CONF = '.phpcop.yml'.freeze
+    CUSTOMIZE_CONF = '.phpcop.yml'
 
     def initialize
       @options = load_configuration(DEFAULT_CONF)

@@ -1,3 +1,6 @@
+# encoding: utf-8
+# frozen_string_literal: true
+
 module PhpCop
   # Store configuration of gems.
   # Parse config file and test if option is enabled

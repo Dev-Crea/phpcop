@@ -1,4 +1,6 @@
-# Module PHP Cop
+# encoding: utf-8
+# frozen_string_literal: true
+
 module Phpcop
-  VERSION = '0.3.1'.freeze
+  VERSION = '0.3.1'
 end
