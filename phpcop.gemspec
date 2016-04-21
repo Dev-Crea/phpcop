@@ -13,8 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'Parser php files and gives non-respected guidelines.'
   spec.homepage      = 'https://github.com/Dev-Crea/phpcop'
 
-  r = %r{^(test|spec|features)/}
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(r) }
+  spec.files        = `git ls-files LICENSE README.md bin config lib`.split($RS)
   spec.bindir        = 'bin'
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
