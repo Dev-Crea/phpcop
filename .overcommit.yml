@@ -1,4 +1,3 @@
 PreCommit:
   RuboCop:
     enabled: true
-    problem_on_unmodified_line: ignore
