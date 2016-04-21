@@ -1,3 +1,6 @@
+# encoding: utf-8
+# frozen_string_literal: true
+
 module PhpCop
   # This class runner
   class Runner
@@ -54,14 +57,18 @@ module PhpCop
 
     def parse_file(file, line, line_number)
       @rules.each do |value|
-        case value.name
-        when 'phpTags'
-          test_file_php_tags(line, line_number) if value.enabled
-        when 'phpEncoding'
-          test_file_php_encoding(file, line, line_number) if value.enabled
-        when 'methods'
-          test_ccpm_methods(file, line, line_number) if value.enabled
-        end
+        parse_rule(value, file, line, line_number) if value.enabled
+      end
+    end
+
+    def parse_rule(rule, file, line, line_number)
+      case rule.name
+      when 'phpTags'
+        test_file_php_tags(line, line_number)
+      when 'phpEncoding'
+        test_file_php_encoding(file, line, line_number)
+      when 'methods'
+        test_ccpm_methods(file, line, line_number)
       end
     end
 
