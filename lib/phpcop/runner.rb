@@ -69,6 +69,8 @@ module PhpCop
         test_file_php_encoding(file, line, line_number)
       when 'methods'
         test_ccpm_methods(file, line, line_number)
+      when 'constants'
+        test_ccpm_constants(file, line, line_number)
       end
     end
 
@@ -83,6 +85,11 @@ module PhpCop
 
     def test_ccpm_methods(file, line, line_number)
       test = PhpCop::Cop::CCPM::Methods.new(file, line, line_number)
+      @count_errors += test.errors
+    end
+
+    def test_ccpm_constants(file, line, line_number)
+      test = PhpCop::Cop::CCPM::Constants.new(file, line, line_number)
       @count_errors += test.errors
     end
   end
