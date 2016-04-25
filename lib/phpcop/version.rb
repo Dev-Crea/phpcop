@@ -2,5 +2,5 @@
 # frozen_string_literal: true
 
 module Phpcop
-  VERSION = '0.3.1'
+  VERSION = '0.4.1'
 end
