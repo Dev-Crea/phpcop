@@ -7,8 +7,8 @@ module PhpCop
     module CCPM
       # Test constant in php class
       class Constants < Cop
-        MSG_ALERT_DESCRIB = 'Class constants MUST be declared in all upper case'
-        MSG_ALERT_DESCRIB << ' with underscore separators.'
+        MSG_ALERT_DESCRIB = 'Class constants MUST be declared in all upper '\
+         'case with underscore separators.'
 
         def initialize(file, line, line_number)
           super(file, line.to_s, line_number)
