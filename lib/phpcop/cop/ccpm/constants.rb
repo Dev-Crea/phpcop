@@ -23,11 +23,9 @@ module PhpCop
 
         def test_constant_valid
           name = @line.slice!(/const.*=/)
-          puts format('origin : %s', name)
           unless name.nil?
             name = name.gsub('const ', '').gsub(' =', '')
             n_constant = name.upcase
-            puts format('o : %s - v : %s', name, n_constant)
             return_an_error(@file, @line_number, 0) unless n_constant.eql? name
           end
         end
