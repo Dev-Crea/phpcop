@@ -25,5 +25,11 @@ AllCops:
   ccpm/methods:
     enabled: true
     description: >
-      http://www.php-fig.org/psr/psr-1/#4-3-methods
+      Method names MUST be declared in camelCase().
     see: 'http://www.php-fig.org/psr/psr-1/#4-3-methods'
+  ccpm/constants:
+    enabled: true
+    description: >
+      Class constants MUST be declared in all upper case with underscore
+      separators.
+    see: 'http://www.php-fig.org/psr/psr-1/#4-1-constants'
