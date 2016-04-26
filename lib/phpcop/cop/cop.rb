@@ -8,6 +8,7 @@ module PhpCop
       attr_reader :errors
       # Display an error 'fichier.ext:line:column'
       MSG_ALERT_FILE = '%s:%s:%s'
+      MSG_ALERT_DESCRIB = ''
 
       def initialize(file, line, line_number)
         @count_open = 0
@@ -24,6 +25,8 @@ module PhpCop
         @errors += 1
         line += 1
         puts format(MSG_ALERT_FILE, file, line, column)
+        puts MSG_ALERT_DESCRIB
+        puts ''
       end
     end
   end

@@ -53,14 +53,6 @@ module PhpCop
                                               invalid: :replace,
                                               replace: '?').encode('UTF-8')
         end
-
-        def return_an_error(file, line, column)
-          @errors += 1
-          line += 1
-          puts format(MSG_ALERT_FILE, file, line, column)
-          puts MSG_ALERT_DESCRIB
-          puts ''
-        end
       end
     end
   end

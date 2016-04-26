@@ -29,14 +29,6 @@ module PhpCop
             return_an_error(@file, @line_number, 0) unless n_constant.eql? name
           end
         end
-
-        def return_an_error(file, line, column)
-          @errors += 1
-          line += 1
-          puts format(MSG_ALERT_FILE, file, line, column)
-          puts MSG_ALERT_DESCRIB
-          puts ''
-        end
       end
     end
   end
