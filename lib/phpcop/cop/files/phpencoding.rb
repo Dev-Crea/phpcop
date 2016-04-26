@@ -8,8 +8,8 @@ module PhpCop
       class PhpEncoding < Cop
         MSG_ALERT_DESCRIB = 'Is not encoding in UTF-8 without BOM.'
 
-        def initialize(file, line, line_number)
-          super(file, line.to_s, line_number)
+        def initialize(file, path, line, line_number)
+          super(file, path, line.to_s, line_number)
           test_line
         end
 
@@ -18,9 +18,7 @@ module PhpCop
         # Parse line and test if line is correctly enconding
         def test_line
           line_encoding = @line
-          unless line_encoding.ascii_only?
-            return_an_error(@file, @line_number, 0)
-          end
+          return_an_error unless line_encoding.ascii_only?
         end
 
         # TODO : Return position column to char non ASCII

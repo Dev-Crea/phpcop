@@ -10,8 +10,8 @@ module PhpCop
         MSG_ALERT_DESCRIB = 'Class constants MUST be declared in all upper '\
          'case with underscore separators.'
 
-        def initialize(file, line, line_number)
-          super(file, line.to_s, line_number)
+        def initialize(file, path, line, line_number)
+          super(file, path, line, line_number)
           test_line
         end
 
@@ -26,7 +26,7 @@ module PhpCop
           unless name.nil?
             name = name.gsub('const ', '').gsub(' =', '')
             n_constant = name.upcase
-            return_an_error(@file, @line_number, 0) unless n_constant.eql? name
+            return_an_error unless n_constant.eql? name
           end
         end
       end

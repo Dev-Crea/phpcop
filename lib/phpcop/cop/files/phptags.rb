@@ -12,15 +12,13 @@ module PhpCop
         TAG_OPEN = ['\<\?php', '\<\?='].freeze
         TAG_CLOSE = ['\?\>'].freeze
 
-        def initialize(file, line = nil, line_number = nil)
-          super(file, line, line_number)
+        def initialize(file, path, line = nil, line_number = nil)
+          super(file, path, line, line_number)
         end
 
         def test_counters
           # Test if tags open is equal to tags close
-          unless @count_open == @count_close
-            return_an_error(@file, @line_number, 0)
-          end
+          return_an_error unless @count_open == @count_close
         end
 
         # Parse line and test if line use correctly tags PHP

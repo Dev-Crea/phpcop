@@ -46,31 +46,31 @@ module PhpCop
       line_number = 0
       # Execute all test in file
       f = File.open(format('%s/%s', path, file), 'r')
-      @php_tag = PhpCop::Cop::Files::PhpTags.new(file)
+      @php_tag = PhpCop::Cop::Files::PhpTags.new(file, path)
       while (line = f.gets)
-        parse_file(file, line, line_number)
+        parse_file(file, line, line_number, path)
         line_number += 1
       end
       @php_tag.test_counters
       @count_errors += @php_tag.errors
     end
 
-    def parse_file(file, line, line_number)
+    def parse_file(file, line, line_number, path)
       @rules.each do |value|
-        parse_rule(value, file, line, line_number) if value.enabled
+        parse_rule(value, file, line, line_number, path) if value.enabled
       end
     end
 
-    def parse_rule(rule, file, line, line_number)
+    def parse_rule(rule, file, line, line_number, path)
       case rule.name
       when 'phpTags'
         test_file_php_tags(line, line_number)
       when 'phpEncoding'
-        test_file_php_encoding(file, line, line_number)
+        test_file_php_encoding(path, file, line, line_number)
       when 'methods'
-        test_ccpm_methods(file, line, line_number)
+        test_ccpm_methods(path, file, line, line_number)
       when 'constants'
-        test_ccpm_constants(file, line, line_number)
+        test_ccpm_constants(path, file, line, line_number)
       end
     end
 
@@ -78,18 +78,18 @@ module PhpCop
       @php_tag.test_line(line, line_number)
     end
 
-    def test_file_php_encoding(file, line, line_number)
-      test = PhpCop::Cop::Files::PhpEncoding.new(file, line, line_number)
+    def test_file_php_encoding(path, file, line, line_number)
+      test = PhpCop::Cop::Files::PhpEncoding.new(file, path, line, line_number)
       @count_errors += test.errors
     end
 
-    def test_ccpm_methods(file, line, line_number)
-      test = PhpCop::Cop::CCPM::Methods.new(file, line, line_number)
+    def test_ccpm_methods(path, file, line, line_number)
+      test = PhpCop::Cop::CCPM::Methods.new(file, path, line, line_number)
       @count_errors += test.errors
     end
 
-    def test_ccpm_constants(file, line, line_number)
-      test = PhpCop::Cop::CCPM::Constants.new(file, line, line_number)
+    def test_ccpm_constants(path, file, line, line_number)
+      test = PhpCop::Cop::CCPM::Constants.new(file, path, line, line_number)
       @count_errors += test.errors
     end
   end

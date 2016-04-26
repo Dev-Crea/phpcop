@@ -11,8 +11,8 @@ module PhpCop
       class Methods < Cop
         MSG_ALERT_DESCRIB = 'Name method is not in camelCase().'
 
-        def initialize(file, line, line_number)
-          super(file, line.to_s, line_number)
+        def initialize(file, path, line, line_number)
+          super(file, path, line, line_number)
           test_line
         end
 
@@ -27,7 +27,7 @@ module PhpCop
           name = name.gsub(/\(.*/, '')
           unless name.include?('__')
             name_camel = name.camelize(:lower)
-            return_an_error(@file, @line_number, 0) unless name_camel.eql? name
+            return_an_error unless name_camel.eql? name
           end
         end
       end
