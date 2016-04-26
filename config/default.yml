@@ -1,13 +1,3 @@
-# Configuration for application
-php:
-  # Precise PHP version
-  version: 7
-  # Precise convention used
-  rules:
-    - PSR-2
-  # Precise framework used
-  framework: zf-2
-
 AllCops:
   # Exclude:
   #    - '**/'
