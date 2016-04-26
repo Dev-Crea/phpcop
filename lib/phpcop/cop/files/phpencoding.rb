@@ -18,7 +18,7 @@ module PhpCop
         # Parse line and test if line is correctly enconding
         def test_line
           line_encoding = @line
-          return_an_error unless line_encoding.ascii_only?
+          return_an_error(MSG_ALERT_DESCRIB) unless line_encoding.ascii_only?
         end
 
         # TODO : Return position column to char non ASCII

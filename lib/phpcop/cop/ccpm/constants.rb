@@ -26,7 +26,7 @@ module PhpCop
           unless name.nil?
             name = name.gsub('const ', '').gsub(' =', '')
             n_constant = name.upcase
-            return_an_error unless n_constant.eql? name
+            return_an_error(MSG_ALERT_DESCRIB) unless n_constant.eql? name
           end
         end
       end

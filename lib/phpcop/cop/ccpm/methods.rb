@@ -27,7 +27,7 @@ module PhpCop
           name = name.gsub(/\(.*/, '')
           unless name.include?('__')
             name_camel = name.camelize(:lower)
-            return_an_error unless name_camel.eql? name
+            return_an_error(MSG_ALERT_DESCRIB) unless name_camel.eql? name
           end
         end
       end

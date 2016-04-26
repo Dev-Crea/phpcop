@@ -18,7 +18,7 @@ module PhpCop
 
         def test_counters
           # Test if tags open is equal to tags close
-          return_an_error unless @count_open == @count_close
+          return_an_error(MSG_ALERT_DESCRIB) unless @count_open == @count_close
         end
 
         # Parse line and test if line use correctly tags PHP
