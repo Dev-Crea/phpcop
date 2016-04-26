@@ -18,13 +18,17 @@ module PhpCop
 
     def initialize
       @options = load_configuration(DEFAULT_CONF)
-      @options ||= load_configuration(CUSTOMIZE_CONF)
+      override_configuration(File.join(Dir.pwd, CUSTOMIZE_CONF))
     end
 
     private
 
     def load_configuration(file)
-      File.exist?(file) ? YAML.load(File.read(file)) : false
+      YAML.load(File.read(file))
+    end
+
+    def override_configuration(file)
+      @options = load_configuration(file) if File.exist?(file)
     end
   end
 end
