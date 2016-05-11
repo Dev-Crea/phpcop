@@ -5,14 +5,18 @@ module PhpCop
   # Store configuration of gems.
   # Parse config file and test if option is enabled
   class ConfigStore
-    attr_reader :options, :rules
+    attr_reader :options, :cops, :rules
 
     def initialize
       opt = ConfigLoader.new
       @options = opt.options
       @rules = []
+      @cops = []
 
       @options.fetch('AllCops').each do |val|
+        @cops.push PhpCop::Cop.new(val[0], val[1])
+      end
+      @options.fetch('php').each do |val|
         @rules.push PhpCop::Rule.new(val[0], val[1])
       end
     end

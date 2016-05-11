@@ -8,6 +8,7 @@ require 'phpcop/configstore'
 require 'phpcop/cli'
 require 'phpcop/runner'
 require 'phpcop/rule'
+require 'phpcop/cop'
 
 require 'phpcop/cop/cop.rb'
 require 'phpcop/cop/files/phptags.rb'
