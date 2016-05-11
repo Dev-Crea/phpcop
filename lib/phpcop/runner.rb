@@ -13,6 +13,7 @@ module PhpCop
       @count_files = 0
       @count_errors = 0
       @conf = config_store
+      @cops = @conf.cops
       @rules = @conf.rules
       @types = { files: false }
 
@@ -40,7 +41,7 @@ module PhpCop
       end
     end
 
-    # Test each rules
+    # Test each cops
     def execute_tests_in_file(file, path)
       @count_files += 1
       line_number = 0
@@ -56,13 +57,13 @@ module PhpCop
     end
 
     def parse_file(file, line, line_number, path)
-      @rules.each do |value|
-        parse_rule(value, file, line, line_number, path) if value.enabled
+      @cops.each do |value|
+        parse_cop(value, file, line, line_number, path) if value.enabled
       end
     end
 
-    def parse_rule(rule, file, line, line_number, path)
-      case rule.name
+    def parse_cop(cop, file, line, line_number, path)
+      case cop.name
       when 'phpTags'
         test_file_php_tags(line, line_number)
       when 'phpEncoding'
