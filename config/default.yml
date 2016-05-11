@@ -1,3 +1,7 @@
+# Configuration for application
+php:
+  rules: 'PSR-1'
+
 AllCops:
   # Exclude:
   #    - '**/'
