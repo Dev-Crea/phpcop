@@ -1,6 +1,8 @@
 # Configuration for application
 php:
-  rules: 'PSR-1'
+  PSR-1:
+    enabled: true
+    see: 'http://www.php-fig.org/psr/psr-1/'
 
 AllCops:
   # Exclude:
